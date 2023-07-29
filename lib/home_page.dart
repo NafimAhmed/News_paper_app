@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:coders_bucket/book_mark_list.dart';
 import 'package:coders_bucket/news_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +127,45 @@ class _HomePageState extends State<HomePage> {
 
         ),
       ),
+
+      drawer: new Drawer(
+
+        child: ListView(
+          children: [
+
+            new UserAccountsDrawerHeader(
+              accountName: Text("Name"),
+              accountEmail: Text("Email"),
+              decoration: new BoxDecoration(
+                  color: Colors.pink
+              ),
+            ),
+
+
+            ListTile(
+              title: Text("Book Mark"),
+              leading: Icon(Icons.bookmark),
+              onTap: (){
+                Get.to(BookMarkList());
+              },
+            ),
+
+            ListTile(
+              title: Text("Logout"),
+              leading: Icon(Icons.logout),
+            ),
+
+
+
+
+
+
+
+
+          ],
+        ),
+      ),
+
     );
   }
 
