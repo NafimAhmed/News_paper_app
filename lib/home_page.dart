@@ -16,6 +16,11 @@ import 'package:sizer/sizer.dart';
 
 class HomePage extends StatefulWidget{
 
+  final String Name;
+  final String phone;
+
+  const HomePage({super.key, required this.Name, required this.phone});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -134,8 +139,8 @@ class _HomePageState extends State<HomePage> {
           children: [
 
             new UserAccountsDrawerHeader(
-              accountName: Text("Name"),
-              accountEmail: Text("Email"),
+              accountName: Text("${widget.Name}"),
+              accountEmail: Text("${widget.phone}"),
               decoration: new BoxDecoration(
                   color: Colors.pink
               ),

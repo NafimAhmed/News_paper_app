@@ -1,17 +1,25 @@
 
 
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'home_page.dart';
+
 class Registration extends StatelessWidget{
 
 
-  TextEditingController NameController=TextEditingController();
-  TextEditingController emailController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
+  TextEditingController nameController= TextEditingController();
+  TextEditingController phoneController= TextEditingController();
+  TextEditingController passwordController= TextEditingController();
+
+
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference ref = FirebaseDatabase.instance.ref("User_profile");
+
 
 
 
@@ -29,9 +37,9 @@ class Registration extends StatelessWidget{
             padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
             child:TextField(
               maxLines: 1,
-              controller: emailController,
+              controller: nameController,
               decoration: InputDecoration(
-                  labelText: "Email",
+                  labelText: "Name",
                   labelStyle: GoogleFonts.raleway(
 
                   ),
@@ -46,7 +54,7 @@ class Registration extends StatelessWidget{
                   ),
                   filled: true,
                   fillColor: Colors.white70,
-                  hintText: "Email",
+                  hintText: "Name",
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
@@ -61,9 +69,9 @@ class Registration extends StatelessWidget{
             padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
             child:TextField(
               maxLines: 1,
-              controller: emailController,
+              controller: phoneController,
               decoration: InputDecoration(
-                  labelText: "Email",
+                  labelText: "Phone Number",
                   labelStyle: GoogleFonts.raleway(
 
                   ),
@@ -78,7 +86,7 @@ class Registration extends StatelessWidget{
                   ),
                   filled: true,
                   fillColor: Colors.white70,
-                  hintText: "Email",
+                  hintText: "Phone Number",
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
@@ -129,9 +137,39 @@ class Registration extends StatelessWidget{
 
 
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
 
-              Navigator.pop(context);
+             // Navigator.pop(context);
+
+              String phone=phoneController.text;
+              String name=nameController.text;
+              String password=passwordController.text;
+
+
+             // DatabaseReference rf= ref.child("profile").child("${email}");
+              //DatabaseReference orderRef=ref.child(widget.phoneNumber).child("user").child("Courier").child(_phone.text.toString());
+
+
+              await ref.child("profile").child("${phone}").child("user").set({
+                "phone": "${phone}",
+                "name": "${name}",
+                "password": "${password}",
+
+
+               }).then((value) {
+
+
+                Get.to(HomePage(
+                  Name: "${name}",
+                  phone: "${phone}",
+                ),
+                    duration: Duration(milliseconds: 500), //duration of transitions, default 1 sec
+                    transition: Transition.rightToLeft );
+
+
+
+              });
+
 
               // Navigator.push(
               //     context,
