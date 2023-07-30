@@ -1,10 +1,14 @@
 # coders_bucket
 
-A new Flutter project.
+This is a News Paper App
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This is a news paper app build in flutter framework. In this app we have use :
+1) Firebase for authentication
+2) http package for api data retriving
+3) Sizer package for making responsive UI
+4) Getx state manager for state management
 
 A few resources to get you started if this is your first Flutter project:
 
