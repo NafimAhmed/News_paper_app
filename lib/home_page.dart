@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatefulWidget{
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
+    return apiMap!=null? Scaffold(
       appBar: AppBar(
         title: Text("Home"),
       ),
@@ -57,9 +58,9 @@ class _HomePageState extends State<HomePage> {
 
 
             ListView.builder(
-              physics: ScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: apiMap!['articles'].length,
+                physics: ScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: apiMap!['articles'].length,
                 itemBuilder: (context,index){
 
                   return Container(
@@ -70,10 +71,10 @@ class _HomePageState extends State<HomePage> {
 
                         onTap: (){
                           Get.to(NewsDetail(
-                              Title: "${apiMap!['articles'][index]['title'].toString()}",
-                              Published_at: "${apiMap!['articles'][index]['publishedAt'].toString()}",
-                              Published_By: "${apiMap!['articles'][index]['author'].toString()}",
-                              Detail: "${apiMap!['articles'][index]['description'].toString()}",
+                            Title: "${apiMap!['articles'][index]['title'].toString()}",
+                            Published_at: "${apiMap!['articles'][index]['publishedAt'].toString()}",
+                            Published_By: "${apiMap!['articles'][index]['author'].toString()}",
+                            Detail: "${apiMap!['articles'][index]['description'].toString()}",
                             ImgURL: "${apiMap!['articles'][index]['urlToImage'].toString()}",
                             userPhone: "${widget.phone}",
                             isVisibleBookMark: true,
@@ -98,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         title: Text("${apiMap!['articles'][index]['title'].toString()}",
                           style: GoogleFonts.openSans(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.bold
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold
                           ),
                         ),
                         subtitle: Column(
@@ -108,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                             Text("Published By : ${apiMap!['articles'][index]['author'].toString()}",
                               style: GoogleFonts.openSans(
                                   fontSize: 14.sp,
-                                color: Colors.grey.shade600
+                                  color: Colors.grey.shade600
                               ),
                             ),
                             Text("Published at : \n${apiMap!['articles'][index]['publishedAt'].toString()}",
@@ -141,7 +142,13 @@ class _HomePageState extends State<HomePage> {
           children: [
 
             new UserAccountsDrawerHeader(
-              accountName: Text("${widget.Name}"),
+              accountName: Text("${widget.Name}",
+                style: GoogleFonts.openSans(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                ),
+                maxLines: 1,
+              ),
               accountEmail: Text("${widget.phone}"),
               decoration: new BoxDecoration(
                   color: Colors.pink
@@ -175,6 +182,15 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
+    ):Scaffold(
+      body: Center(
+        child: LoadingAnimationWidget.staggeredDotsWave(
+          color: Colors.pink,
+          size: 100,
+        ),
+
+
+      ),
     );
   }
 

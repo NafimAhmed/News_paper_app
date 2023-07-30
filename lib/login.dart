@@ -123,12 +123,14 @@ class Loging extends StatelessWidget{
 
                   if(snapshot.value.toString()==passwordController.text.toString()){
 
+                    Navigator.pop(context);
+
 
                     Get.to(HomePage(Name: "${snapshotname.value.toString()}", phone: "${snapshotphone.value.toString()}"),
                         duration: Duration(milliseconds: 500), //duration of transitions, default 1 sec
                         transition: Transition.rightToLeft );
 
-                   // Navigator.pop(context);
+
 
 
                     // Navigator.push(
@@ -222,8 +224,18 @@ class Loging extends StatelessWidget{
             ),
           ),
 
+          SizedBox(
+            height: 40,
+          ),
+
           InkWell(
-            child: Text("Create new account"),
+            child: Text("Create new account",
+            style: GoogleFonts.raleway(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+              color: Colors.pink
+            ),
+            ),
             onTap: (){
 
               Get.to(Registration(),

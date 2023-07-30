@@ -28,6 +28,9 @@ class Registration extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Registration"),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

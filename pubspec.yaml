@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   fluttertoast: ^8.2.1
+  loading_animation_widget: ^1.2.0+4
   firebase_core: ^2.15.0
   firebase_database: ^10.2.4
   firebase_auth: ^4.7.2
