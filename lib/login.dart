@@ -37,6 +37,7 @@ class Loging extends StatelessWidget{
             child:TextField(
               maxLines: 1,
               controller: phoneController,
+              keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                   labelText: "Phone Number",
                   labelStyle: GoogleFonts.raleway(
@@ -70,6 +71,7 @@ class Loging extends StatelessWidget{
             padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
             child:TextField(
               maxLines: 1,
+              obscureText: true,
               controller: passwordController,
               decoration: InputDecoration(
 
