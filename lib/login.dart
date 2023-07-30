@@ -28,6 +28,7 @@ class Loging extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
 
@@ -105,7 +106,7 @@ class Loging extends StatelessWidget{
           ElevatedButton(
             onPressed: () async {
 
-              Navigator.pop(context);
+
 
               if(phoneController.text.isNotEmpty)
               {
@@ -126,6 +127,8 @@ class Loging extends StatelessWidget{
                     Get.to(HomePage(Name: "${snapshotname.value.toString()}", phone: "${snapshotphone.value.toString()}"),
                         duration: Duration(milliseconds: 500), //duration of transitions, default 1 sec
                         transition: Transition.rightToLeft );
+
+                   // Navigator.pop(context);
 
 
                     // Navigator.push(

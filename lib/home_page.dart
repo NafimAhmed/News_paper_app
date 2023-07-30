@@ -75,6 +75,8 @@ class _HomePageState extends State<HomePage> {
                               Published_By: "${apiMap!['articles'][index]['author'].toString()}",
                               Detail: "${apiMap!['articles'][index]['description'].toString()}",
                             ImgURL: "${apiMap!['articles'][index]['urlToImage'].toString()}",
+                            userPhone: "${widget.phone}",
+                            isVisibleBookMark: true,
                           ),
 
                               duration: Duration(milliseconds: 500), //duration of transitions, default 1 sec
@@ -151,7 +153,9 @@ class _HomePageState extends State<HomePage> {
               title: Text("Book Mark"),
               leading: Icon(Icons.bookmark),
               onTap: (){
-                Get.to(BookMarkList());
+                Get.to(BookMarkList(
+                  userPhone: "${widget.phone}",
+                ));
               },
             ),
 

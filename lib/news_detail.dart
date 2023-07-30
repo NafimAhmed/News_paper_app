@@ -7,13 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 class NewsDetail extends StatelessWidget{
-  final String Title,Published_at,Published_By,Detail,ImgURL;
+  final String Title,Published_at,Published_By,Detail,ImgURL,userPhone;
+  final bool isVisibleBookMark;
 
-   NewsDetail({super.key, required this.Title, required this.Published_at, required this.Published_By, required this.Detail, required this.ImgURL});
+   NewsDetail({super.key, required this.Title, required this.Published_at, required this.Published_By, required this.Detail, required this.ImgURL, required this.userPhone, required this.isVisibleBookMark});
 
 
   FirebaseDatabase database = FirebaseDatabase.instance;
-  DatabaseReference ref = FirebaseDatabase.instance.ref("User_profile");
+  DatabaseReference ref = FirebaseDatabase.instance.ref("User_profile").child("profile");
 
 
 
@@ -26,11 +27,13 @@ class NewsDetail extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("News Detail"),
-            InkWell(
+
+            Visibility(
+                child:InkWell(
               onTap: () async {
 
 
-                DatabaseReference rf= ref.child("bookMark").child("${Published_at}");
+                DatabaseReference rf= ref.child("${userPhone}").child("bookMark").child("${Published_at}");
                 //DatabaseReference orderRef=ref.child(widget.phoneNumber).child("user").child("Courier").child(_phone.text.toString());
 
                 await rf.set({
@@ -48,7 +51,10 @@ class NewsDetail extends StatelessWidget{
               child: Icon(Icons.bookmark,
                 color: Colors.orange,
               ),
+            ),
+              visible: isVisibleBookMark,
             )
+
           ],
         ),
       ),
