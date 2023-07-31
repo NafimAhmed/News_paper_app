@@ -30,87 +30,90 @@ class BookMarkList extends StatelessWidget{
       appBar: AppBar(
         title: Text("Book Mark"),
       ),
-      body: Column(
-        children: [
-          FirebaseAnimatedList(
+      body: SingleChildScrollView(
+        child:Column(
+          children: [
+            FirebaseAnimatedList(
 
-            physics: ScrollPhysics(),
-            shrinkWrap: true,
-            query: dbref,
-            reverse: true,
-            itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
-
-
-              return Container(
-                margin: EdgeInsets.all(8.0),
-                child: Card(
-                  child: ListTile(
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              query: dbref,
+              reverse: true,
+              itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
 
 
-                    onTap: (){
-                      Get.to(NewsDetail(
-                        Title: "${snapshot.child("title").value.toString()}",
-                        Published_at: "${snapshot.child("Published_at").value.toString()}",
-                        Published_By: "${snapshot.child("Published_By").value.toString()}",
-                        Detail: "${snapshot.child("Detail").value.toString()}",
-                        ImgURL: "${snapshot.child("ImgURL").value.toString()}",
-                        userPhone: "${userPhone}",
-                        isVisibleBookMark: false,
-                      ),
-
-                          duration: Duration(milliseconds: 500), //duration of transitions, default 1 sec
-                          transition: Transition.rightToLeft );
-                    },
+                return Container(
+                  margin: EdgeInsets.all(8.0),
+                  child: Card(
+                    child: ListTile(
 
 
+                      onTap: (){
+                        Get.to(NewsDetail(
+                          Title: "${snapshot.child("title").value.toString()}",
+                          Published_at: "${snapshot.child("Published_at").value.toString()}",
+                          Published_By: "${snapshot.child("Published_By").value.toString()}",
+                          Detail: "${snapshot.child("Detail").value.toString()}",
+                          ImgURL: "${snapshot.child("ImgURL").value.toString()}",
+                          userPhone: "${userPhone}",
+                          isVisibleBookMark: false,
+                        ),
 
-                    leading: Image.network("${snapshot.child("ImgURL").value.toString()}",
-                      width: 25.w,
-                      loadingBuilder: (context,child,loadingProgress){
-                        if (loadingProgress == null) {
-                          return child;
-                        } else {
-                          return CircularProgressIndicator();
-                        }
+                            duration: Duration(milliseconds: 500), //duration of transitions, default 1 sec
+                            transition: Transition.rightToLeft );
                       },
 
 
-                    ),
-                    title: Text("${snapshot.child("title").value.toString()}",
-                      style: GoogleFonts.openSans(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold
+
+                      leading: Image.network("${snapshot.child("ImgURL").value.toString()}",
+                        width: 25.w,
+                        loadingBuilder: (context,child,loadingProgress){
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        },
+
+
+                      ),
+                      title: Text("${snapshot.child("title").value.toString()}",
+                        style: GoogleFonts.openSans(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Published By : ${snapshot.child("Published_By").value.toString()}",
+                            style: GoogleFonts.openSans(
+                                fontSize: 14.sp,
+                                color: Colors.grey.shade600
+                            ),
+                          ),
+                          Text("Published at : \n${snapshot.child("Published_at").value.toString()}",
+                            style: GoogleFonts.openSans(
+                                fontSize: 12.sp,
+                                color: Colors.grey.shade600
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Published By : ${snapshot.child("Published_By").value.toString()}",
-                          style: GoogleFonts.openSans(
-                              fontSize: 14.sp,
-                              color: Colors.grey.shade600
-                          ),
-                        ),
-                        Text("Published at : \n${snapshot.child("Published_at").value.toString()}",
-                          style: GoogleFonts.openSans(
-                              fontSize: 12.sp,
-                              color: Colors.grey.shade600
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-              );
+                );
 
 
 
 
-            },
+              },
 
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      )
+
     );
   }
 
